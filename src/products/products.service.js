@@ -10,4 +10,5 @@ function read(productId) {
 
 module.exports = {
   list,
+  read,
 };
