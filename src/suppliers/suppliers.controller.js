@@ -1,6 +1,7 @@
 const suppliersService = require("./suppliers.service.js");
 const hasProperties = require("../errors/hasProperties");
 const hasRequiredProperties = hasProperties("supplier_name", "supplier_email");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 
 async function create(req, res) {
@@ -67,7 +68,16 @@ async function supplierExists(req, res, next) {
 // EXPORTS //
 
 module.exports = {
-  create: [hasOnlyValidProperties, hasRequiredProperties, create],
-  update: [supplierExists, hasOnlyValidProperties, hasRequiredProperties, update],
-  delete: [supplierExists, destroy],
+  create: [
+    hasOnlyValidProperties,
+    hasRequiredProperties,
+    asyncErrorBoundary(create),
+  ],
+  update: [
+    asyncErrorBoundary(supplierExists),
+    hasOnlyValidProperties,
+    hasRequiredProperties,
+    asyncErrorBoundary(update),
+  ],
+  delete: [asyncErrorBoundary(supplierExists), asyncErrorBoundary(destroy)],
 };

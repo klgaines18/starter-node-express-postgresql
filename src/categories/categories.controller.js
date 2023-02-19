@@ -1,4 +1,5 @@
 const categoriesService = require("./categories.service");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 // *** WITHOUT ASYNC *** //
 
@@ -15,5 +16,5 @@ async function list(req, res) {
 }
 
 module.exports = {
-  list,
+  list: asyncErrorBoundary(list),
 };
