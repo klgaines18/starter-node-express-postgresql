@@ -49,8 +49,10 @@ function hasOnlyValidProperties(req, res, next) {
   next();
 }
 
+
+
 module.exports = {
   create: [hasOnlyValidProperties, hasRequiredProperties, create],
-  update,
+  update: [hasOnlyValidProperties, hasRequiredProperties, update],
   delete: destroy,
 };
