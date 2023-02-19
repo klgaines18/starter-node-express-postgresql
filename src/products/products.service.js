@@ -7,6 +7,10 @@ const addCategory = mapProperties({
   category_description: "category.category_description",
 });
 
+const addSupplier = mapProperties({
+  supplier_id: "supplier.id"
+})
+
 function list() {
   return knex("products").select("*");
 }
@@ -18,7 +22,8 @@ function read(product_id) {
     .select("p.*", "c.*")
     .where({ "p.product_id": product_id })
     .first()
-    .then(addCategory);
+    .then(addCategory)
+    .then(addSupplier)
 }
 
 function listOutOfStockCount() {
