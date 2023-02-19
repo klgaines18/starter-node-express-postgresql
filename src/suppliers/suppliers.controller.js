@@ -50,7 +50,7 @@ function hasOnlyValidProperties(req, res, next) {
 }
 
 module.exports = {
-  create,
+  create: [hasOnlyValidProperties, hasRequiredProperties, create],
   update,
   delete: destroy,
 };
