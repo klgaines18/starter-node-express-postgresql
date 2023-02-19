@@ -5,6 +5,7 @@ const categoriesRouter = require("./categories/categories.router");
 const suppliersRouter = require("./suppliers/suppliers.router");
 
 app.use(express.json());
+app.set('json spaces', 2) // remove this if production issues
 
 app.use("/products", productsRouter);
 app.use("/categories", categoriesRouter);
