@@ -16,6 +16,11 @@ async function listPriceSummary(req, res, next) {
   res.json({ data: data });
 }
 
+async function listTotalWeightByProduct(req, res) {
+  const data = await productsService.listTotalWeightByProduct()
+  res.json({ data: data });
+}
+
 // ** WITHOUT ASYNC **
 
 // function list(req, res, next) {
@@ -61,4 +66,5 @@ module.exports = {
   list: asyncErrorBoundary(list),
   listOutOfStockCount: asyncErrorBoundary(listOutOfStockCount),
   listPriceSummary: asyncErrorBoundary(listPriceSummary),
+  listTotalWeightByProduct: asyncErrorBoundary(listTotalWeightByProduct),
 };
