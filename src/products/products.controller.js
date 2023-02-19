@@ -1,7 +1,8 @@
 const productsService = require("./products.service");
 
-function read(req, res, next) {
-  res.json({ data: { product_title: "some product title" } });
+function read(req, res) {
+  const { product: data } = res.locals;
+  res.json({ data });
 }
 
 function list(req, res, next) {
@@ -27,6 +28,6 @@ function productExists(req, res, next) {
 }
 
 module.exports = {
-  read: [read],
+  read: [productExists, read],
   list: [list],
 };
