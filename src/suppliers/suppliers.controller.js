@@ -59,17 +59,13 @@ function hasOnlyValidProperties(req, res, next) {
   next();
 }
 
-function supplierExists(req, res, next) {
-  suppliersService
-    .read(req.params.supplierId)
-    .then((supplier) => {
-      if (supplier) {
-        res.locals.supplier = supplier;
-        return next();
-      }
-      next({ status: 404, message: `Supplier cannot be found.` });
-    })
-    .catch(next);
+async function supplierExists(req, res, next) {
+  const supplier = await suppliersService.read(req.params.supplierId);
+  if (supplier) {
+    res.locals.supplier = supplier;
+    return next();
+  }
+  next({ status: 404, message: `Supplier cannot be found.` });
 }
 
 
