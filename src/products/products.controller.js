@@ -5,11 +5,18 @@ function read(req, res) {
   res.json({ data });
 }
 
-function list(req, res, next) {
-  productsService
-    .list()
-    .then((data) => res.json({ data }))
-    .catch(next);
+// ** WITHOUT ASYNC **
+
+// function list(req, res, next) {
+//   productsService
+//     .list()
+//     .then((data) => res.json({ data }))
+//     .catch(next);
+// }
+
+async function list(req, res, next) {
+  const data = await productsService.list();
+  res.json({ data });
 }
 
 // Validation //
