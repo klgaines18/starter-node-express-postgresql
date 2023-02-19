@@ -1,4 +1,7 @@
 const suppliersService = require("./suppliers.service.js");
+const hasProperties = require("../errors/hasProperties");
+const hasRequiredProperties = hasProperties("supplier_name", "supplier_email");
+
 
 async function create(req, res, next) {
   res.status(201).json({ data: { supplier_name: "new supplier" } });
