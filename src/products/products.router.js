@@ -8,7 +8,7 @@ router
   .all(methodNotAllowed);
 
 router
-  .route("/:productId([0-9]+)")
+  .route("/:productId")
   .get(controller.read)
   .all(methodNotAllowed);
 
